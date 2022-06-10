@@ -20,6 +20,9 @@ var App = {
     App.fetch(App.stopSpinner);
 
     // TODO: Make sure the app loads data from the API
+
+    // call set interval with fetch to continually refresh
+
     // continually, instead of just once at the start.
   },
 
@@ -30,6 +33,18 @@ var App = {
 
       // TODO: Use the data to update Messages and Rooms
       // and re-render the corresponding views.
+
+      /* grab data using parse.readall,
+      with the data, put it into messages.js to 'hold' all the message data
+      call messages viewer to render/append all the message data we got onto our HTML DOM
+
+      do the same steps for rooms, get the room names that exist on server
+      save it into rooms storage object
+      call roomsview to update our dropdown list of rooms
+
+      can use the callback function to start and stop spinner picture while fetching.
+      */
+
     });
   },
 

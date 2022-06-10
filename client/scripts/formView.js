@@ -14,9 +14,21 @@ var FormView = {
     // Stop the browser from submitting the form
     event.preventDefault();
 
+    /*
+    create a message object to hold our data from the form
+      within the message object:
+      take our current username - set it as user:
+      take the message from inside the text box - set it as text:
+      take the room name that we're in : set as roomname:
+
+      take newly created message object and use Parse.create to push it to the server.
+
+      rest should take care of it to show up when we push to server, fetch it back and it should pop up.
+    */
+
     // TODO: Currently, this is all handleSubmit does.
     // Make this function actually send a message to the Parse API.
-  
+
     console.log('click!');
   },
 
