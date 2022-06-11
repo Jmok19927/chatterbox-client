@@ -42,9 +42,13 @@ var MessagesView = {
     if (!message.text) {
       return;
     }
+    if (!message.username) {
+      message.username = 'anon';
+    };
+    message.username = decodeURI(message.username);
     let $messageNode = $(MessageView.render(message))
     // if message.username is in our friends set, add friends class.
-    let sanitized = decodeURI(message.username); // _.template("<%-username%>"
+    let sanitized = message.username; // _.template("<%-username%>"
     //)({username : message.username });
     if (Friends._data.has(sanitized)) {
       $messageNode.addClass('friend');
@@ -61,14 +65,13 @@ var MessagesView = {
   handleClick: function(event) {
     // TODO: handle a user clicking on a message
     // (this should add the sender to the user's friend list).
-    let sanitized = _.template("<%-username%>"
 
-    )({username :$(this).text() })
+    let username = $(this).text();
 
-    if (Friends._data.has(sanitized)) {
-      Friends._data.delete(sanitized);
+    if (Friends._data.has(username)) {
+      Friends._data.delete(username);
     } else {
-      Friends._data.add(sanitized);
+      Friends._data.add(username);
     }
     MessagesView.render();
 

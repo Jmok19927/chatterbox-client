@@ -33,6 +33,28 @@ var Parse = {
         console.error('chatterbox: Failed to fetch messages', error);
       }
     });
-  }
+  },
+
+  // readRoom: function(successCB, errorCB = null) {
+  //   $.ajax({
+  //     url: Parse.server,
+  //     type: 'GET',
+  //     data: {},
+  //     contentType: 'application/json',
+  //     success: successCB,
+  //     error: errorCB || function(error) {
+  //       console.error('chatterbox: Failed to fetch messages', error);
+  //     }
+  //   });
+  // }
+
+readRoom: function(successCB, errorCB = null) {
+  $.ajax({
+    url: Parse.server,
+    type: 'GET',
+    data: {username : 'anonymous'},
+    contentType: 'application/json',
+  });
+}
 
 };
