@@ -14,6 +14,15 @@ var FormView = {
     // Stop the browser from submitting the form
     event.preventDefault();
 
+    var newMessage = {};
+    newMessage.username = App.username;
+    newMessage.text = $('#message').val();// idk pull the text from the textDOM
+    newMessage.roomname = '' || ''; // grab our current room or default to ''
+
+    Parse.create(newMessage);
+    $('#message').val('');
+    setTimeout(App.fetch, 100);
+
     /*
     create a message object to hold our data from the form
       within the message object:

@@ -1,4 +1,4 @@
-// This App object represents the Chatterbox application.
+// This App object represents the Chatterbrenderox application.
 // It should initialize the other parts of the application
 // and begin making requests to the Parse API for data.
 
@@ -7,6 +7,8 @@ var App = {
   $spinner: $('.spinner img'),
 
   username: 'anonymous',
+
+
 
   initialize: function() {
     App.username = window.location.search.substr(10);
@@ -22,6 +24,7 @@ var App = {
     // TODO: Make sure the app loads data from the API
 
     // call set interval with fetch to continually refresh
+    setInterval(App.fetch, 2500);
 
     // continually, instead of just once at the start.
   },
@@ -29,7 +32,16 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log(data);
+      // console.log(data , "data in parse");
+      Messages._data = data;
+      MessagesView.initialize();
+
+      // data.forEach((message) => {
+      //   Messages._data.push(message);
+      // })
+
+
+      callback();
 
       // TODO: Use the data to update Messages and Rooms
       // and re-render the corresponding views.

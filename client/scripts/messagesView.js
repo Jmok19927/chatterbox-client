@@ -8,13 +8,17 @@ var MessagesView = {
   initialize: function() {
     // TODO: Perform any work which needs to be done
     // when this view loads.
+    MessagesView.render();
 
     // call render?
   },
 
   render: function() {
     // TODO: Render _all_ the messages.
-
+    MessagesView.$chats.html('');
+    for (let index = Messages._data.length-1; index >= 0; index-- ) {
+      MessagesView.renderMessage(Messages._data[index]);
+    }
     /*
     for loop checking through our messages storage.
       for each message object check if the room matches our current room
@@ -24,10 +28,12 @@ var MessagesView = {
 
   renderMessage: function(message) {
     // TODO: Render a single message.
-
-    //take a message object from our messages storage
-    //pass it into our messageView render which turns it into a DOM element
-    //prepend (goes to the top) the DOM element to $chats
+    MessagesView.$chats.prepend(MessageView.render(message));
+    /*
+    take a message object from our messages storage
+    pass it into our messageView render which turns it into a DOM element
+    prepend (goes to the top) the DOM element to $chats
+    */
   },
 
   handleClick: function(event) {

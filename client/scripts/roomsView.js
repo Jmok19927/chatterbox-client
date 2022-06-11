@@ -6,7 +6,10 @@ var RoomsView = {
   $button: $('#rooms button'),
   $select: $('#rooms select'),
 
+  inputtedRoomName: '',
+
   initialize: function() {
+    RoomsView.$button.on('click', RoomsView.handleClick);
     // TODO: Perform any work which needs to be done
     // when this view loads.
   },
@@ -19,7 +22,11 @@ var RoomsView = {
 
   renderRoom: function(roomname) {
     // TODO: Render out a single room.
-
+    //RoomsView.$select
+    // var cleanName = _.template(
+    //   "<option value='<%-roomname%>'><%-roomname%></option>"
+    // );
+    RoomsView.$select.append(`<option value='${roomname}'>${roomname}</option>`);
     // take in a roomname, append it to the dropdown list?
   },
 
@@ -35,10 +42,25 @@ var RoomsView = {
   handleClick: function(event) {
     // TODO: Handle the user clicking the "Add Room" button.
 
-    // send either a blank message object to the server with a the text in the box as the room to create a new room
-    // or maybe a message of 'username has created 'room'
 
-    //only do that if the room does not already exist, if the room exists in the room list, change the active room var to the room typed in and rerender.
+    let handleRoomName = function() {
+      console.log('clicked add room');
+      let roomName = prompt("input room name", "");
+      let sanitized = roomName // _.template(
+      //   "<%-roomName%>"
+      // )();
+      if (sanitized !== null && sanitized !== "") {
+        RoomsView.renderRoom(sanitized);
+      }
+    }
+
+    handleRoomName();
+    // RoomsView.$button.on('click', handleRoomName);
+
+    /*
+
+    only do that if the room does not already exist, if the room exists in the room list, change the active room var to the room typed in and rerender.
+    */
   }
 
 };

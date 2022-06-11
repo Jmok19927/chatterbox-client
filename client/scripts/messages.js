@@ -5,13 +5,20 @@
 var Messages = {
 
   // TODO: Define how you want to store your messages.
-  _data: null,
+  _data: [],
 
 
-  // make this an object or array to store message objects
 
-  // unsure if we need to actually interact with messages if we can do
-  // it all with pushing/pulling to server?
+  get: function(){
+    return Messages._data;
+  }
+
+  /*
+   make this an object or array to store message objects
+
+   unsure if we need to actually interact with messages if we can do
+   it all with pushing/pulling to server?
+  */
 
 
 
