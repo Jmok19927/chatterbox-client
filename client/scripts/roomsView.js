@@ -39,6 +39,7 @@ var RoomsView = {
     if (!Rooms._appended.has(roomname)) {
       let sanitized = _.template(`<%-roomName%>`)({roomName : roomname});
       RoomsView.$select.append(`<option value='${sanitized}'>${sanitized}</option>`);
+      Rooms.addRoom(roomname);
       Rooms._appended.add(roomname);
     }
     // take in a roomname, append it to the dropdown list?
