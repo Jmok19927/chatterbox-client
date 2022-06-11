@@ -16,7 +16,6 @@ var MessagesView = {
 
   render: function() {
     // TODO: Render _all_ the messages.
-    MessagesView.$chats.html('');
     if (RoomsView.inputtedRoomName === '') {
       for (let index = Messages._data.length-1; index >= 0; index-- ) {
         MessagesView.renderMessage(Messages._data[index]);
@@ -47,14 +46,23 @@ var MessagesView = {
     };
     message.username = decodeURI(message.username);
     let $messageNode = $(MessageView.render(message))
+
+    if (message.text.includes(`@${App.username}`)) {
+      $messageNode.addClass('mention')
+    }
     // if message.username is in our friends set, add friends class.
     let sanitized = message.username; // _.template("<%-username%>"
     //)({username : message.username });
     if (Friends._data.has(sanitized)) {
       $messageNode.addClass('friend');
     }
+    // only render if the message is new
+    if (message.message_id > Messages._mostRecent) {
+      // console.log(message.message_id, Messages._mostRecent)
+      MessagesView.$chats.prepend($messageNode);
+      Messages._mostRecent = message.message_id;
+    }
 
-    MessagesView.$chats.prepend($messageNode);
     /*
     take a message object from our messages storage
     pass it into our messageView render which turns it into a DOM element

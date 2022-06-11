@@ -7,6 +7,8 @@ var Messages = {
   // TODO: Define how you want to store your messages.
   _data: [],
 
+  _mostRecent: 0,
+
 
 
   get: function(){

@@ -88,3 +88,7 @@ form input[type=text] {
     background-color: #0090da;
 }
 
+.mention {
+    background-color: goldenrod;
+    background-image: linear-gradient(to right, goldenrod, green);
+}
