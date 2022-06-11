@@ -9,6 +9,7 @@ var MessagesView = {
     // TODO: Perform any work which needs to be done
     // when this view loads.
     MessagesView.render();
+    $(".username").off().on('click', MessagesView.handleClick);
 
     // call render?
   },
@@ -16,9 +17,19 @@ var MessagesView = {
   render: function() {
     // TODO: Render _all_ the messages.
     MessagesView.$chats.html('');
-    for (let index = Messages._data.length-1; index >= 0; index-- ) {
-      MessagesView.renderMessage(Messages._data[index]);
+    if (RoomsView.inputtedRoomName === '') {
+      for (let index = Messages._data.length-1; index >= 0; index-- ) {
+        MessagesView.renderMessage(Messages._data[index]);
+      }
+    } else {
+      for (let index = Messages._data.length-1; index >= 0; index-- ) {
+        if (Messages._data[index].roomname === RoomsView.inputtedRoomName) {
+          MessagesView.renderMessage(Messages._data[index]);
+        }
+      }
     }
+
+
     /*
     for loop checking through our messages storage.
       for each message object check if the room matches our current room
@@ -28,7 +39,18 @@ var MessagesView = {
 
   renderMessage: function(message) {
     // TODO: Render a single message.
-    MessagesView.$chats.prepend(MessageView.render(message));
+    if (!message.text) {
+      return;
+    }
+    let $messageNode = $(MessageView.render(message))
+    // if message.username is in our friends set, add friends class.
+    let sanitized = decodeURI(message.username); // _.template("<%-username%>"
+    //)({username : message.username });
+    if (Friends._data.has(sanitized)) {
+      $messageNode.addClass('friend');
+    }
+
+    MessagesView.$chats.prepend($messageNode);
     /*
     take a message object from our messages storage
     pass it into our messageView render which turns it into a DOM element
@@ -39,6 +61,17 @@ var MessagesView = {
   handleClick: function(event) {
     // TODO: handle a user clicking on a message
     // (this should add the sender to the user's friend list).
+    let sanitized = _.template("<%-username%>"
+
+    )({username :$(this).text() })
+
+    if (Friends._data.has(sanitized)) {
+      Friends._data.delete(sanitized);
+    } else {
+      Friends._data.add(sanitized);
+    }
+    MessagesView.render();
+
 
 
     /* on click function, on click, check if the target is a username

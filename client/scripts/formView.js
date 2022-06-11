@@ -17,8 +17,7 @@ var FormView = {
     var newMessage = {};
     newMessage.username = App.username;
     newMessage.text = $('#message').val();// idk pull the text from the textDOM
-    newMessage.roomname = '' || ''; // grab our current room or default to ''
-
+    newMessage.roomname = RoomsView.$select.val() || ''; // grab our current room or default to ''
     Parse.create(newMessage);
     $('#message').val('');
     setTimeout(App.fetch, 100);
@@ -38,7 +37,7 @@ var FormView = {
     // TODO: Currently, this is all handleSubmit does.
     // Make this function actually send a message to the Parse API.
 
-    console.log('click!');
+    // console.log('click!');
   },
 
   setStatus: function(active) {

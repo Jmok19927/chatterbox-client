@@ -10,7 +10,10 @@ var Rooms = {
   addRoom: function(inputName) {
     Rooms._data.add(inputName);
     // render room
-  }
+  },
+
+  _appended: new Set()
+
 
 
   /* probably a set like friends list, only need 1 of each room

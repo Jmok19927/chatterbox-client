@@ -35,6 +35,10 @@ var App = {
       // console.log(data , "data in parse");
       Messages._data = data;
       MessagesView.initialize();
+      data.forEach((messageObject) => {
+        Rooms._data.add(messageObject.roomname);
+      })
+      RoomsView.initialize();
 
       // data.forEach((message) => {
       //   Messages._data.push(message);
